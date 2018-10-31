@@ -1,0 +1,54 @@
+.product {
+  margin-top: 50px;
+  display: flex;
+  &__name {
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
+  &__latname {
+    font-style: italic;
+  }
+  &__details {
+    width: 65%;
+  }
+  &__ingredients {
+    width: 33%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  &__thumb-wrapper {
+    display: none;
+  }
+  &__svg {
+    height: 500px;
+    width: 100%;
+    circle {
+      fill: #d39761;
+      fill-opacity: .1;
+      stroke: #d39761;
+      stroke-width: 1;
+      transition: .3s;
+    }
+    g {
+      cursor: pointer;
+      &:hover circle {
+        fill: #213566;
+        stroke: #213566;
+      }
+      &:hover text {
+        fill: #213566;
+      }
+    }
+    image {
+      pointer-events: none;
+    }
+    text {
+      fill: #d39761;
+      font-family: 'Arial';
+      font-size: 17px;
+      transition: .3s;
+      pointer-events: none;
+    }
+  }
+}

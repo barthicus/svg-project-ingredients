@@ -1,0 +1,30 @@
+{
+  "env": {
+    "development": {
+      "presets": [
+        "@babel/preset-env"
+      ]
+    },
+    "production": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "es2015": {
+              "modules": false
+            },
+            "targets": {
+              "ie": 9,
+              "uglify": true
+            }
+          }
+        ]
+      ]
+    },
+    "test": {
+      "presets": [
+        "@babel/preset-env"
+      ]
+    }
+  }
+}

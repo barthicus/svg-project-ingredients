@@ -1,0 +1,30 @@
+{
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "import"
+  ],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".js"
+        ]
+      }
+    }
+  },
+  "rules": {
+    "import/no-unresolved": "off",
+    "no-console": 0
+  },
+  "extends": [
+    "airbnb-base",
+    "eslint:recommended"
+  ],
+  "env": {
+    "browser": true
+  }
+}
