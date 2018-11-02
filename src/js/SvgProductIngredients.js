@@ -6,10 +6,11 @@ import EventEmitter from './EventEmitter'
 Snap.plugin(circlePathPlugin)
 
 class SvgProductIngredients extends EventEmitter {
-  constructor (svgElement, imageSrc) {
+  constructor (svgElement, imageSrc, svgViewBoxSize) {
     super()
 
     if (!svgElement) throw `Svg element doesn't exists.`
+    this.svgViewBoxSize = svgViewBoxSize || { width: 850, heigth: 500 }
 
     this.ingredients = []
     this.currentIngredientNr = 0
@@ -20,7 +21,8 @@ class SvgProductIngredients extends EventEmitter {
 
     this.snapSvg = Snap(this.svgElement)
     // this.snapSvg.attr({ viewBox: `0 0 ${this.svgElementWrapper.offsetWidth} ${this.svgElementWrapper.offsetHeight}` })
-    this.snapSvg.attr({ viewBox: `0 0 850 500` })
+    this.snapSvg.attr({ viewBox: `0 0 ${this.svgViewBoxSize.width} ${this.svgViewBoxSize.height}` })
+    // this.snapSvg.attr({ viewBox: `0 0 850 500` })
     this.emit('init')
   }
   addIngredient (ingredient) {
@@ -64,9 +66,9 @@ class SvgProductIngredients extends EventEmitter {
       // const scale = tempImgElement.width / this.svgElementWrapper.offsetWidth
       const imgWidth = tempImgElement.width * scale
       const imgHeight = tempImgElement.height * scale
-      const imgXOffset = this.svgElementWrapper.offsetWidth / 2 - imgWidth / 2
+      const imgXOffset = this.svgViewBoxSize.width / 2 - imgWidth / 2
       const bottomPadding = 10
-      const imgYOffset = this.svgElementWrapper.offsetHeight - imgHeight - bottomPadding
+      const imgYOffset = this.svgViewBoxSize.height - imgHeight - bottomPadding
 
       this.image = this.snapSvg.image(this.imageSrc, imgXOffset, imgYOffset, imgWidth, imgHeight)
 

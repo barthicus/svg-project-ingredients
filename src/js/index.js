@@ -46,7 +46,7 @@ const appleIngredients = [
 ]
 
 const svgElement = document.querySelector('.product__svg')
-const productViewer = new SvgProductIngredients(svgElement, 'assets/apple.png')
+const productViewer = new SvgProductIngredients(svgElement, 'assets/apple.png', {width: 850, height: 500})
 const sliderContainer = document.querySelector('.ingredients__items')
 let slider = null
 
