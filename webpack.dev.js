@@ -34,7 +34,9 @@ module.exports = merge(common, {
     overlay: {
       warnings: true,
       errors: true
-    }
+    },
+    contentBase: [ 'src' ],
+    watchContentBase: true
   },
   plugins: [
     new FriendlyErrorsWebpackPlugin(),
