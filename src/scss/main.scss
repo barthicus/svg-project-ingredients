@@ -1,54 +1,126 @@
+@import "../../static/bulma-0.7.2/bulma.sass";
+
+/*
+ * General demo layout
+ */
 .product {
   margin-top: 50px;
-  display: flex;
-  &__name {
-    font-size: 30px;
-    margin-bottom: 20px;
+  &__row {
+    display: flex;
+    margin-top: 50px;
+    // @media screen and (max-width: $desktop) {
+    //   flex-direction: column;
+    // }
   }
   &__latname {
     font-style: italic;
   }
   &__details {
-    width: 65%;
+    text-align: center;
   }
-  &__ingredients {
-    width: 33%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-  }
-  &__thumb-wrapper {
-    display: none;
-  }
-  &__svg {
-    height: 500px;
-    width: 100%;
-    circle {
-      fill: #d39761;
-      fill-opacity: .1;
-      stroke: #d39761;
-      stroke-width: 1;
-      transition: .3s;
+  &__svg-wrapper {
+    // width: 65%;
+    // flex-shrink: 0;
+    @media screen and (max-width: $desktop) {
+      // width: 100%;
+      // padding: 0 1rem;
     }
-    g {
-      cursor: pointer;
-      &:hover circle {
+  }
+}
+
+/*
+ * Main svg
+ */
+.product__svg {
+  circle {
+    fill: #d39761;
+    fill-opacity: .1;
+    stroke: #d39761;
+    stroke-width: 1;
+    transition: .3s;
+  }
+  g {
+    cursor: pointer;
+    &.active, &:hover {
+      circle {
         fill: #213566;
         stroke: #213566;
       }
-      &:hover text {
+      text {
         fill: #213566;
       }
     }
-    image {
-      pointer-events: none;
+  }
+  image {
+    pointer-events: none;
+  }
+  text {
+    fill: #d39761;
+    font-family: 'Arial';
+    font-size: 17px;
+    transition: .3s;
+    pointer-events: none;
+  }
+}
+
+/*
+ * Ingredients slider
+ */
+.ingredients {
+  // flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin-left: 3rem;
+  @media screen and (max-width: $desktop) {
+    margin-left: 0;
+    margin-top: 3rem;
+  }
+  &__title {
+  }
+  &__items {
+    background-color: #eee5dd;
+    cursor: grab;
+    user-select: none;
+    transition: .3s;
+    &:hover {
+      background-color: #ebddd2;
     }
-    text {
-      fill: #d39761;
-      font-family: 'Arial';
-      font-size: 17px;
-      transition: .3s;
-      pointer-events: none;
+  }
+  &__item {
+    padding: 2rem;
+    h3 {
+      font-size: 1.5rem;
     }
+    a {
+      margin-bottom: 1rem;
+      display: block;
+      font-size: 0.8rem;
+    }
+  }
+  .tns-outer {
+    display: flex;
+    flex-direction: column;
+  }
+  .tns-horizontal.tns-subpixel {
+    white-space: normal;
+  }
+  .tns-controls {
+    order: 1;
+    margin-top: 1rem;
+    & > button {
+      margin: 0 10px;
+    }
+  }
+}
+
+/*
+ * Ingredients slider fallback
+ */
+.no-js .ingredients__items {
+  overflow-x: auto;
+  > div {
+    float: none; 
   }
 }
