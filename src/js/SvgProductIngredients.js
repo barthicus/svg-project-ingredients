@@ -12,61 +12,46 @@ class SvgProductIngredients extends EventEmitter {
     if (!svgElement) throw `Svg element doesn't exists.`
 
     this.ingredients = []
+    this.currentIngredientNr = 0
 
     this.svgElement = svgElement
     this.svgElementWrapper = this.svgElement.parentElement
     this.imageSrc = imageSrc
 
     this.snapSvg = Snap(this.svgElement)
-    this.snapSvg.attr({ viewBox: `0 0 ${this.svgElementWrapper.offsetWidth} ${this.svgElementWrapper.offsetHeight}` })
+    // this.snapSvg.attr({ viewBox: `0 0 ${this.svgElementWrapper.offsetWidth} ${this.svgElementWrapper.offsetHeight}` })
+    this.snapSvg.attr({ viewBox: `0 0 850 500` })
     this.emit('init')
   }
   addIngredient (ingredient) {
-    const fullText = `${ingredient.name} (${ingredient.qty})`
-    const textPadding = ingredient.circle.flipText ? ingredient.circle.radius + 19 : ingredient.circle.radius + 7
+    const fullText = `${ingredient.enName} (${ingredient.qty})`
+    const textPadding = ingredient.circle.radius + 7
     const circlePath = this.snapSvg.circlePath(ingredient.circle.x, ingredient.circle.y, textPadding).attr({
       fill: 'none'
     })
 
-    let textStart = ingredient.circle.start
-    if (ingredient.circle.flipText) {
-      circlePath.transform('s1,-1') // flip path to show text correctly
-      textStart = -textStart
-    }
-    // textStart = 0
-    textStart += Math.round(Math.PI * ingredient.circle.radius) / 4 // start from top of circle
-    // textStart = detectIE() ? 0 : textStart
-
+    const textStart = ingredient.circle.start + Math.round(Math.PI * ingredient.circle.radius) / 4 // start from top of circle
     const svgCircle = this.snapSvg.circle(ingredient.circle.x, ingredient.circle.y, ingredient.circle.radius)
     const svgText = this.snapSvg.text(textStart, 0, fullText).attr('textpath', circlePath)
-    // const svgText2 = this.snapSvg.text(textStart, 0, ingredient.qty).attr('textpath2', circlePath)
     const offset = detectIE() === false ? textStart / (Math.PI * 2 * ingredient.circle.radius) * 100 : 0
 
     svgText.textPath.attr({ startOffset: offset + '%' })
-    this.snapSvg.g(svgCircle, svgText).attr({
-      // 'nr': nr,
-      'data-aos': 'fade',
-      'data-aos-duration': 1000,
-      // 'data-aos-delay': nr * 100,
-      // 'data-is-preselected': isPreselected
+    const nextIngredientNr = document.querySelectorAll(`[data-name="ingredient"]`).length + 1
+    const addedIngredient = this.snapSvg.g(svgCircle, svgText).attr({
+      'data-nr': nextIngredientNr,
+      'data-name': 'ingredient'
     })
 
-    // set slide
-    // ingredient.click(function(){
-    //   var productName = $(this.snapSvg.node).closest('.product').data('name')
-    //   var ingredientNr = this.attr('nr')
-    //   /*svg.selectAll('g').forEach(function(el){
-    //     el.node.classList.remove('active')
-    //   })
-    //   this.node.classList.add('active')*/
-    //   sliders[productName].trigger('to.owl.carousel', ingredientNr - 1)
-    // })
+    addedIngredient.click(el => {
+      const ingredientNr = Number(el.target.parentElement.attributes['data-nr'].value)
+      this.selectIngredient(ingredientNr)
+    })
   }
   addIngredients (ingredients) {
-    // this.ingredients = ingredients
     ingredients.forEach(ingredient => this.addIngredient(ingredient))
-    this.setProductImage()
     this.emit('ingredients.add', ingredients)
+    this.setProductImage()
+    this.selectIngredient(1)
   }
   setProductImage () {
     if (this.image) this.image.remove()
@@ -80,12 +65,19 @@ class SvgProductIngredients extends EventEmitter {
       const imgHeight = tempImgElement.height * scale
       const imgXOffset = this.svgElementWrapper.offsetWidth / 2 - imgWidth / 2
       const bottomPadding = 10
-      const imgYOffset = this.svgElementWrapper.offsetHeight - imgWidth - bottomPadding
+      const imgYOffset = this.svgElementWrapper.offsetHeight - imgHeight - bottomPadding
 
       this.image = this.snapSvg.image(this.imageSrc, imgXOffset, imgYOffset, imgWidth, imgHeight)
 
       this.emit('image.add', this.image)
     }
+  }
+  selectIngredient (nr) {
+    if (nr === this.currentIngredientNr) return
+    document.querySelectorAll(`[data-name="ingredient"]`).forEach(el => el.classList.remove('active'))
+    document.querySelector(`[data-name="ingredient"][data-nr="${nr}"]`).classList.add('active')
+    this.currentIngredientNr = nr
+    this.emit('ingredients.select', nr)
   }
 }
 
