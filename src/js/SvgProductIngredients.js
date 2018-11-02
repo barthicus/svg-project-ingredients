@@ -50,17 +50,18 @@ class SvgProductIngredients extends EventEmitter {
   addIngredients (ingredients) {
     ingredients.forEach(ingredient => this.addIngredient(ingredient))
     this.emit('ingredients.add', ingredients)
-    this.setProductImage()
+    this.setProductImage(.6)
     this.selectIngredient(1)
   }
-  setProductImage () {
+  setProductImage (scale) {
+    scale = scale || 1
     if (this.image) this.image.remove()
 
     let tempImgElement = detectIE() ? new Image() : document.createElement('img')
     tempImgElement.src = this.imageSrc
   
     tempImgElement.onload = () => {
-      const scale = tempImgElement.width / this.svgElementWrapper.offsetWidth
+      // const scale = tempImgElement.width / this.svgElementWrapper.offsetWidth
       const imgWidth = tempImgElement.width * scale
       const imgHeight = tempImgElement.height * scale
       const imgXOffset = this.svgElementWrapper.offsetWidth / 2 - imgWidth / 2
