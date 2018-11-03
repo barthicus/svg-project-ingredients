@@ -26,7 +26,7 @@ class SvgProductIngredients extends EventEmitter {
     this.emit('init')
   }
   addIngredient (ingredient) {
-    const fullText = `${ingredient.enName} (${ingredient.qty})`
+    const fullText = `${ingredient.name} (${ingredient.qty})`
     const textPadding = ingredient.circle.radius + 7
     const circlePath = this.snapSvg.circlePath(ingredient.circle.x, ingredient.circle.y, textPadding).attr({
       fill: 'none'

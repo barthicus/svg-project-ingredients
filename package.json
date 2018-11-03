@@ -12,7 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "snapsvg": "^0.5.1",
-    "tiny-slider": "^2.8.7"
+    "tiny-slider": "^2.8.7",
+    "highlight.js": "^9.13.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",

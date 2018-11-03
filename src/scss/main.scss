@@ -1,8 +1,18 @@
+/*
+ * Optional - Bulma.css
+ */
 @import "../../static/bulma-0.7.2/bulma.sass";
+@import "../../node_modules/highlight.js/styles/dracula.css";
 
 /*
- * General demo layout
+ * Optional - Demo styles
  */
+ .demo-intro {
+   margin-top: 30px;
+ }
+ .demo-footer {
+   margin-bottom: 30px;
+ }
 .product {
   margin-top: 50px;
   &__row {
@@ -25,7 +35,7 @@
 }
 
 /*
- * Main svg
+ * Required library styles
  */
 .product__svg {
   width: 100%;
@@ -62,7 +72,7 @@
 }
 
 /*
- * Ingredients slider
+ * Optional - Ingredients slider
  */
 .ingredients {
   display: flex;
@@ -111,7 +121,7 @@
 }
 
 /*
- * Ingredients slider fallback
+ * Optional - Ingredients slider fallback
  */
 .no-js .ingredients__items {
   overflow-x: auto;
