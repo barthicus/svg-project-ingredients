@@ -11,9 +11,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bulma": "^0.7.2",
+    "highlight.js": "^9.13.1",
     "snapsvg": "^0.5.1",
-    "tiny-slider": "^2.8.7",
-    "highlight.js": "^9.13.1"
+    "tiny-slider": "^2.8.7"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",
