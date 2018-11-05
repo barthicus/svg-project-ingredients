@@ -1,9 +1,9 @@
 /* eslint import/no-extraneous-dependencies: "off" */
 const merge = require('webpack-merge')
-const common = require('./webpack.common.js')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 const SimpleProgressWebpackPlugin = require('simple-progress-webpack-plugin');
+const common = require('./webpack.common.js')
 
 module.exports = merge(common, {
   mode: 'development',
