@@ -1,4 +1,7 @@
-# svg-project-ingredients
+# Svg Project Ingredients
+
+[![Build Status](https://travis-ci.org/barthicus/svg-project-ingredients.svg?branch=master)](https://travis-ci.org/barthicus/svg-project-ingredients)
+
 **Svg Project Ingredients** is a js library that allows you to visualise product ingredients as SVG object. Library draws circles with some text on given coord (x, y) under the product image.   
 User can interract with circles such as clicking on them and read additional info about give ingredient.
 
